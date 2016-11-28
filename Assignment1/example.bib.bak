@@ -1,0 +1,24 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF-8
+
+
+@Misc{homekit,
+  Title                    = {The Smart Home Just Got Smarter},
+
+  Author                   = {Apple},
+  Year                     = {2016},
+
+  Owner                    = {snorriste},
+  Timestamp                = {2016.11.28},
+  Url                      = {www.apple.com/ios/home/}
+}
+
+@Misc{nest,
+  Title                    = {Nest is home},
+
+  Author                   = {Google Nest},
+  Year                     = {2016},
+
+  Url                      = {https://nest.com/}
+}
+
