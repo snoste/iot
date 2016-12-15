@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/lwm2mclient.dir/lwm2mclient.c.o"
+  "CMakeFiles/lwm2mclient.dir/system_api.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_security.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_server.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_device.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_firmware.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_location.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_connectivity_moni.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_connectivity_stat.c.o"
+  "CMakeFiles/lwm2mclient.dir/object_access_control.c.o"
+  "CMakeFiles/lwm2mclient.dir/test_object.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/liblwm2m.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/uri.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/utils.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/objects.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/tlv.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/data.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/list.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/packet.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/transaction.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/registration.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/bootstrap.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/management.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/observe.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/json.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/discover.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/block1.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/core/er-coap-13/er-coap-13.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/examples/shared/commandline.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/examples/shared/platform.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/examples/shared/memtrace.c.o"
+  "CMakeFiles/lwm2mclient.dir/home/snorriste/wakaama/examples/shared/connection.c.o"
+  "lwm2mclient.pdb"
+  "lwm2mclient"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/lwm2mclient.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

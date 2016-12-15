@@ -1,0 +1,3 @@
+/home/snorriste/ownCloud/TUe/Q2/IoT/practical/wakaama-project/client/CMakeFiles/edit_cache.dir
+/home/snorriste/ownCloud/TUe/Q2/IoT/practical/wakaama-project/client/CMakeFiles/rebuild_cache.dir
+/home/snorriste/ownCloud/TUe/Q2/IoT/practical/wakaama-project/client/CMakeFiles/lwm2mclient.dir
