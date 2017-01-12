@@ -13,7 +13,7 @@
 
 
 \begin{document}
-\title{Practical Assignment\\ {\fontsize{13}{0}\selectfont 2IMN15: Internet of Things } \\ {\fontsize{13}{0}\selectfont \today}}
+\title{Practical Assignment\\ {\fontsize{13}{0}\selectfont 2IMN15: Internet of Things } \\ {\fontsize{13}{0}\selectfont \today }\\{ \fontsize{13}{0}\selectfont Group 14}}
 
 \author{\IEEEauthorblockN{Saikrishna Kalluri}
 	\IEEEauthorblockA{TU/e, Netherlands\\
@@ -26,9 +26,14 @@
 
 \IEEEpeerreviewmaketitle
 
+
+\begin{abstract}
+	This practical assignment for the course IoT involves creating an autonomous lightning system controlled and managed by different but relevant wireless protocols. The architecture and development of this system will be the topic of this report.\\
+	
+\end{abstract}
+
 \section{Introduction}
 
-A course grained reconfigurable architecture offers a developer to create an advanced application specif infrastructure. By using the tool and code provided there is much room for improvement in this specific convulsion assignment. 
 
 
 %\begin{figure}[h]
@@ -40,65 +45,9 @@ A course grained reconfigurable architecture offers a developer to create an adv
 %\end{figure}
 
 
-\begin{lstlisting}[basicstyle=\tiny,language=python,caption={Start the 6lbr service and check the status}]
-import numpy as np
-from matplotlib import pyplot as plt
+\begin{lstlisting}[basicstyle=\tiny,language=python,caption={Code}]
 
-prog = []
-diffFirst = []
-percentage = []
-E = []
-A = []
-C = []
-
-def edap(a,b,c):
-E.append(a)
-A.append(b)
-C.append(c)
-prog.append(a*pow(10,-12)*b*pow(10,-12)*c)
-
-def show():
-for i in range(len(prog)):
-print('{},  {:012.12f}, 10E-9 J*m^2'.format(i,prog[i]*pow(10,9)))
-percentage.append(round(100*(prog[0]-prog[i])/prog[0], 2))
-
-print("Total percentage progress of each change:", percentage)
-print(E,A,C)
-
-def main():
-#Naive
-edap(28697895.6,9.68,3669625)
-
-#bypass, single bypass made from example
-edap(28161989.0,9.68,3583188)
-
-#nr2,
-edap(27626100.6,9.72,3496755)
-
-#nr2-1
-edap(27030652.6,9.72,3400715)
-
-#nr3 
-edap(26494746.0,9.74,3314278)
-
-#nr4 
-edap(25284645.4,9.74,3170219)
-
-#nr4-1
-edap(25204579.4,9.74,3150815)
-
-#nr5 
-edap(26345355.8,11.48,3025863)
-
-#nr6 
-edap(24811427.1,11.48,2766556)
-
-#nr6-1 
-edap(24661697.7,11.48,2766556)	
-
-if __name__ == "__main__":
-main()
-show()
+Code snippet
 \end{lstlisting}
 
 \end{document}
