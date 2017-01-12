@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: Apache Commons Pool
+Implementation-Version: 2.3
+Built-By: snorriste
+Specification-Vendor: The Apache Software Foundation
+Implementation-Vendor-Id: org.apache
+Specification-Title: Apache Commons Pool
+Implementation-Vendor: The Apache Software Foundation
+X-Compile-Target-JDK: 1.6
+Implementation-Build: ${scmBranch}@r${buildNumber}; ${maven.build.time
+ stamp}
+X-Compile-Source-JDK: 1.6
+Build-Jdk: 1.8.0_111
+Created-By: Maven Integration for Eclipse
+Specification-Version: 2.3
+

@@ -1,0 +1,180 @@
+\documentclass[10pt]{IEEEtran}
+\usepackage{cite}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+	showstringspaces=false,
+	commentstyle=\color{red},
+	keywordstyle=\color{blue}
+}
+
+
+\begin{document}
+\title{CGRA Optimization methods\\ {\fontsize{13}{0}\selectfont 5SIA0 Embedded Computer Architecture} \\ {\fontsize{13}{0}\selectfont December 8th, 2016}}
+
+\author{\IEEEauthorblockN{}
+\IEEEauthorblockN{Snorri Stefánsson}
+\IEEEauthorblockA{University of Reykjavik, Iceland\\
+TU/e, Netherlands\\
+Email: snorriste@gmail.com}}
+
+\maketitle
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+
+A course grained reconfigurable architecture offers a developer to create an advanced application specif infrastructure. By using the tool and code provided there is much room for improvement in this specific convulsion assignment. 
+
+\section{Setup, work flow and future student recommendations}
+
+There were various obstacles experience over the project time, firstly the tool was installed on a local machine which was seen as an advantage for running modelsim more smoothly, avoiding VPN when working from home and the multiuser load on the servers. The local computer is running Ubuntu 16.04 only (So VPN also takes some effort to sort out when done first). This consumed great amount of time, both to initially configure and keeping up with bug fixes and watching the forum for tips to optimize this local machine experience. Finally, it was decided to use the server and set up the VPN, SFTP file manager connection and a sublime SFTP connection with prober highlighting. Recommendation for a fellow future student would to use the server with the later mentioned setup. Even though running windows I would recommend installing a VM (ubuntu) just to work from the SFTP and SSH connection for work flow efficiency. This was the first week, without much work on the actual assignment.
+
+\section{Optimization}
+
+In order to improve the architecture and parallel assembly code, basic knowledge of convolution is helpful as well as understanding of the algorithm in C. The progress started very slow as the learning curve was high. Starting by doing the first bypass suggested in the tutorial for understanding of the infrastructure. Then multiple bypasses were done in the code but mainly from the immediate unit to the multiplier and the ALU. That alone could already create an improvement of 24\% as seen in Figure \ref{fig:fig2}. At that point no more intuitive bypasses were possible without other configuration. Thus at that point it was decided to create another register file in order to try store some value that had to be updated often such as the l and k inner loop counters. To conclude that, creating the second registry file did not improve the performance. 
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=1.1\linewidth]{img/figure3}
+		\caption{The CGRA architecture. The new RF file and new inputs to the MUL and the ALU}
+		\label{fig:fig3}
+	\end{center}
+\end{figure}
+
+\vspace{3em}
+
+During the optimization/assignment time line there were a few revision made for each "major" change in order for keeping the work done safe. These revisions can be seen in the list below, the progress of each revision in Figure \ref{fig:fig2} and the progress of all components of the EDAP calculations on Figure \ref{fig:fig3}.
+
+\begin{enumerate}
+	\item Naive  No Change	
+	\item Bypass Bypass from example	
+	\item Revision 2 New input added to mul from imm and another single bypass added
+	\item Revision 2.1 Same input from last time used but more bypasses utilized from same connection
+	\item Revision 3 New input to the ALU from imm, offset directly put to alu, no RF file middleman
+	\item Revision 4 Removing duplicate stores of same values such as increment values and increase reuse
+	\item Revision 4.1 More bypasses from using the last revision input
+	\item Revision 5 Create the second register file, not much change apart from that. A large Area increase can be seen when that is done. Naturally.
+	\item Revision 6 Equalize the use of both registry files to decrease the overhead of storing in the RF.
+	\item Revision 6.1 Remove unnecessary RF operations
+\end{enumerate}
+
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=\linewidth]{img/figure2}
+		\caption{The progress of the EDAP in percentages from the initial value gotten from the Naive solution = 0}
+		\label{fig:fig2}
+	\end{center}
+\end{figure} 
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=\linewidth]{img/figure1}
+		\caption{Area, Cycles and Energy progress each relative to itself. }
+		\label{fig:fig1}
+	\end{center}
+\end{figure} 
+
+\begin{table}[htbp]
+	\caption{EDAP for each revision of the code}
+	\begin{center}
+		\begin{tabular}{crcl}
+			\midrule
+			Revision & \multicolumn{1}{l}{ EDAP } & \multicolumn{1}{l}{ Absolute Rev. } &  Unit  \\ 
+			\midrule
+			Naive (0)   & 1.019 & 0 &   $10^{-9} J*m^2$  \\ 
+			Bypass (1)   & 0.977 & 1 &   $10^{-9} J*m^2$  \\ 
+			2  & 0.939 & 2 &   $10^{-9} J*m^2$  \\ 
+			2.1  & 0.893 & 3 &   $10^{-9} J*m^2$  \\ 
+			3  & 0.855 & 4 &   $10^{-9} J*m^2$  \\ 
+			4  & 0.781 & 5 &   $10^{-9} J*m^2$  \\ 
+			4.1  & 0.774 & 6 &   $10^{-9} J*m^2$  \\ 
+			5  & 0.915 & 7 &   $10^{-9} J*m^2$  \\ 
+			6  & 0.788 & 8 &   $10^{-9} J*m^2$  \\ 
+			6.1  & 0.783 & 9 &   $10^{-9} J*m^2$  \\ 
+			\midrule
+		\end{tabular}
+	\end{center}
+	\label{}
+\end{table}
+
+\vspace{2em}
+
+\section{Conclusion}
+
+In the end a 24 \% improvement was made. There is more room for improvement in many areas. The time limit did not allow for further improvement of the architecture in the report. But ideally, starting with nothing at this point would be preferred. After doing some optimization and looking back, the beginning is difficult but if creating the structure after writing this report, it would be done differently and more efficiently. First of all implementing more FU thus introducing greater parallelism which this infrastructure can do so well. For example by using two ALUs to (for example) do parallel summing of values in one cycle from either two register files or a LSU along with one register file. Each line in the code would get longer and the area would increase, but the energy and the cycles would dramatically decrease. This more complex model would show more improvement than the one exhibited in this report. 
+
+Latest improvement can be seen in the .pasm file in the following directory: 
+"/home/eca17/eca17089/CGRA/benchmarks/convolution/nr6" with the corresponding architecture in the platforms directory. Altough the best results can be seen in:
+"/home/eca17/eca17089/CGRA/benchmarks/convolution/nr4" with the corresponding architecture in the platforms directory.
+\\
+Thanks for a great assignment!
+
+\section*{Appendix A - A useful Python script created}
+
+\begin{lstlisting}[basicstyle=\tiny,language=python,caption={Start the 6lbr service and check the status}]
+import numpy as np
+from matplotlib import pyplot as plt
+
+prog = []
+diffFirst = []
+percentage = []
+E = []
+A = []
+C = []
+
+def edap(a,b,c):
+E.append(a)
+A.append(b)
+C.append(c)
+prog.append(a*pow(10,-12)*b*pow(10,-12)*c)
+
+def show():
+for i in range(len(prog)):
+print('{},  {:012.12f}, 10E-9 J*m^2'.format(i,prog[i]*pow(10,9)))
+percentage.append(round(100*(prog[0]-prog[i])/prog[0], 2))
+
+print("Total percentage progress of each change:", percentage)
+print(E,A,C)
+
+def main():
+#Naive
+edap(28697895.6,9.68,3669625)
+
+#bypass, single bypass made from example
+edap(28161989.0,9.68,3583188)
+
+#nr2,
+edap(27626100.6,9.72,3496755)
+
+#nr2-1
+edap(27030652.6,9.72,3400715)
+
+#nr3 
+edap(26494746.0,9.74,3314278)
+
+#nr4 
+edap(25284645.4,9.74,3170219)
+
+#nr4-1
+edap(25204579.4,9.74,3150815)
+
+#nr5 
+edap(26345355.8,11.48,3025863)
+
+#nr6 
+edap(24811427.1,11.48,2766556)
+
+#nr6-1 
+edap(24661697.7,11.48,2766556)	
+
+if __name__ == "__main__":
+main()
+show()
+\end{lstlisting}
+
+\end{document}

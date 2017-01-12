@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Built-By: snorriste
+Build-Jdk: 1.8.0_111
+Created-By: Maven Integration for Eclipse
+Implementation-Title: Apache Log4j API
+Implementation-Vendor: Apache Software Foundation
+Implementation-Vendor-Id: org.apache
+Implementation-Version: 2.1
+Specification-Title: Apache Log4j API
+Specification-Vendor: Apache Software Foundation
+Specification-Version: 2.1
+X-Compile-Source-JDK: 1.6
+X-Compile-Target-JDK: 1.6
+
