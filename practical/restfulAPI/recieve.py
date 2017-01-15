@@ -1,12 +1,33 @@
 import requests
+import ast
+import time
 
-#sending dict as payload syntax: {'key1': 'value1', 'key2': ['value2', 'value3']}
-#r = requests.get('http://127.0.0.1:8080/api/v1/getrecord/prufa')
-#r = requests.get('http://127.0.0.1:8080/api/clients/pws/3/0/15')
+from sense_hat import SenseHat
 
-#recieving data from the coap server and sending it to the cloud team
-r = requests.get('http://127.0.0.1:8081/executeSystem/light_registration')
-print(r.status_code)
-# if r.status_code == 200:
-#     print("Data recieved - Ack recieved!")
-#     print("payload: {}".format(r.text))
+def changeMyLightColor(settings):
+	print("Now I'm gonna set this as the light settings on this pi")
+	print(settings[0],settings[1],settings[2])
+	#sense.clear(settings)
+	sense.clear(settings[0],settings[1],settings[2])
+	#
+	#
+
+
+while(True):
+	r = requests.get('http://192.168.1.15:8080/api/clients/NIKOS-LENOVO/10250/0/5')
+	print(r.status_code)
+	print(r.text)
+	mylist = r.text
+
+	print(type(mylist))
+
+	mydict = ast.literal_eval(mylist)
+	settings = mydict['content']['value']
+
+
+	settings = [x for x in map(str.strip, settings.split(',')) if x]
+	settings = map(int, settings)
+	print(settings)
+	changeMyLightColor(settings)
+
+	time.sleep(2)
