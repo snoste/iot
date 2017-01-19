@@ -1,14 +1,16 @@
-\documentclass[conference]{IEEEtran}
+\documentclass[11pt]{article}
 \usepackage[pdftex]{graphicx}
 \usepackage{amsmath}
+ \usepackage[margin=3cm]{geometry}
 \usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{listings}
-\lstset{basicstyle=\ttfamily,
-	showstringspaces=false,
-	commentstyle=\color{red},
-	keywordstyle=\color{blue}
-}
+\usepackage{multicol}
+%\lstset{basicstyle=\ttfamily,
+%	showstringspaces=false,
+%	commentstyle=\color{red},
+%	keywordstyle=\color{blue}
+%}
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \usepackage{biblatex}
@@ -19,32 +21,32 @@
 \begin{document}
 \title{Practical Report Group 14: Broker\\ {\fontsize{13}{0}\selectfont Internet of Things (2IMN15) 2016-2017, Eindhoven University of Technology} \\ {\fontsize{13}{0}\selectfont \today }}
 
-\author{\IEEEauthorblockN{Sai Krishna Kalluri}
-	\IEEEauthorblockA{TU/e, Netherlands\\
+\author{Sai Krishna Kalluri \\ TU/e, Netherlands\\
 		Email: saikrishh.kalluri@gmail.com}
-	\and
-	\IEEEauthorblockN{Snorri Stefansson}
-	\IEEEauthorblockA{TU/e, Netherlands\\
-		Email: snorriste@gmail.com}}
+%	\and
+%\author{Snorri Stefansson \\ TU/e, Netherlands\\
+%		Email: snorriste@gmail.com}
 \maketitle
 
-\IEEEpeerreviewmaketitle
 
 
 \begin{abstract}
-	This practical assignment for the course IoT involves creating a lightning system controlled and managed by different but relevant wireless protocols and separated individual applications. The architecture and development of this system will be the topic of this report.\\
-	
+	This practical assignment for the course IoT involves creating a lightning system controlled and managed by different but relevant wireless protocols and separated individual applications. The architecture and development of this system will be the topic of this report.\\	
 \end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
 
 \section{Group Members}
 \begin{table}[htbp]
 	\caption{}
-	\begin{tabular}{lclL{1.6cm}L{1cm}}
+	\begin{tabular}{lcllc}
 		\toprule
 		No & Name & Student ID & Email & Master Program \\ 
 		\midrule
-		1 & Sai Krishna Kalluri & 1035631 & s.k.kalluri@ \newline student.tue.nl & ES \\ 
-		2 & Snorri Stefansson & 1033995 & s.stefansson@ \newline student.tue.nl & ES \\ 
+		1 & Sai Krishna Kalluri & 1035631 & s.k.kalluri@student.tue.nl & ES \\ 
+		2 & Snorri Stefansson & 1033995 & s.stefansson@student.tue.nl & ES \\ 
 		\toprule
 	\end{tabular}
 	\label{}
@@ -53,9 +55,10 @@
 \section{Group Partners}
 \begin{table}[htbp]
 	\caption{}
-	\begin{tabular}{lL{0.2cm}L{.8cm}L{3.3cm}lL{.6cm}}
+	\centering
+	\begin{tabular}{llL{2cm}L{5cm}lc}
 		\toprule
-		No & Group No \newline & \newline Part  & Group Member’s Name and Email & StudID & Program \\ 
+		No & Group No  &  Part  & Group Member’s Name and Email & StudID & Program \\ 
 		\midrule
 		1 & 11 & End Device & \textbf{Christoforos Boukouvalas} \newline c.boukouvalas@student.tue.nl & 0832600 &  \\ 
 		&  11& End Device & \textbf{Nikos Avramis} \newline avramisn@gmail.com & 1115964 & AT \\ 
@@ -77,7 +80,7 @@ Creating a lighting system with an IoT architecture may sound like an overkill, 
 
 \section{System Interfaces}
 There are three groups which develop this system as stated in Figure \ref{fig:fig1}.
-Each team has their purpose. This is the report of the broker, thus will be written with that perspective. Two other teams complete the total assignment, they are cloud group and end-device group and will be references as that through out the report. To shortly describe the relationship with these groups and their purpose; The cloud group is basically responsible of bookkeeping of all information important for the system and the end-device group is responsible of maintaining lights and sensors in the systems which define end device. The end device will present light upon request of the user and be able to detect a user with a camera, sensor.
+Each team has their purpose. This is the report of the broker, thus will be written with that perspective. Two other teams complete the total assignment, they are cloud group and end-device group and will be references as that through out the report. To shortly describe the relationship with these groups and their purpose; The cloud group is basically responsible of bookkeeping of all information important for the system and the end-device group is responsible of maintaining lights and sensors in the systems which define end device. The end device will present light upon request of the user and be able to detect a user with a camera, sensor. The exact purpose of each team will also come into the protocol and information data exchange related to the modules such as Leshan and MQTT.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=1\linewidth]{img/design}
@@ -103,7 +106,7 @@ The architecture is somewhat predefined but many design options were left up to 
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=0.8\linewidth]{img/overview}
+		\includegraphics[width=0.6\linewidth]{img/overview}
 		\caption{}
 		\label{fig:fig2}
 	\end{center}
@@ -112,21 +115,27 @@ The architecture is somewhat predefined but many design options were left up to 
 \input{lwm2m}
 
 \subsection{mDNS: Avahi broker}
-This part 
+mDNS stands for Mulsticast Domain Name System and it can inform other devices on the same network of the IP of the host. It uses the same structure as DNS but it is a zero configuration service. Avahi implements this zero configuration network discovery profile. On linux Avahi is already installed an requires no extra installation. Both the cloud and end device need to take advantage of this service and can retrieve the IP address with discovery, thus then connecting to the remaining system such a MQTT or Leshan. Figure \ref{fig:avahi} shows how this can be done.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=1.1\linewidth]{img/avahi}
+		\caption{The bash command for running the avahi client on linux}
+		\label{fig:avahi}
+	\end{center}
+\end{figure}
+
+
+For embedding this into Java, Python or any other high level programming language, it is possible to call the bash command with a 'OS' library and read the output. Setting this up on the broker only required running on startup. Problems during the development were mostly related to port and firewall issues with the laptop or network connection.
 
 \subsection{MQTT: Mosquitto}
-
-
-
+MQTT stands for MQ Telemetry Transport and is a very light weight publish and subscribe protocol. The Mosquitto broker is installed on the linux machine and then the clients can both publish messages to topics and subscribe to the topics as well. This module worked seamlessly after install. In the testing section it can be observed how messages are published (this is only for making sure from the broker side that the MQTT broker is working).
 
 \input{prod}
 \input{disc}
 \input{eval}
 \input{refl}
 \input{cont}
-
-
-
 
 \printbibliography
 
