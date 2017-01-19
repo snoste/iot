@@ -6,6 +6,14 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{multicol}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{Practical report Group 14: Broker – 21MN15}
+\cfoot{Page \thepage}
+
 %\lstset{basicstyle=\ttfamily,
 %	showstringspaces=false,
 %	commentstyle=\color{red},
@@ -19,13 +27,10 @@
 \addbibresource{references.bib}
 
 \begin{document}
-\title{Practical Report Group 14: Broker\\ {\fontsize{13}{0}\selectfont Internet of Things (2IMN15) 2016-2017, Eindhoven University of Technology} \\ {\fontsize{13}{0}\selectfont \today }}
+\title{Practical Report Group 14: Broker\\ {\fontsize{13}{0}\selectfont Internet of Things (2IMN15) 2016-2017, Eindhoven University of Technology}}
 
-\author{Sai Krishna Kalluri \\ TU/e, Netherlands\\
-		Email: saikrishh.kalluri@gmail.com}
-%	\and
-%\author{Snorri Stefansson \\ TU/e, Netherlands\\
-%		Email: snorriste@gmail.com}
+\author{Sai Krishna Kalluri, TU/e, Netherlands, 
+		Email: saikrishh.kalluri@gmail.com \& \\  Snorri Stefansson, TU/e, Netherlands, Email: snorriste@gmail.com}
 \maketitle
 
 
@@ -115,7 +120,7 @@ The architecture is somewhat predefined but many design options were left up to 
 \input{lwm2m}
 
 \subsection{mDNS: Avahi broker}
-mDNS stands for Mulsticast Domain Name System and it can inform other devices on the same network of the IP of the host. It uses the same structure as DNS but it is a zero configuration service. Avahi implements this zero configuration network discovery profile. On linux Avahi is already installed an requires no extra installation. Both the cloud and end device need to take advantage of this service and can retrieve the IP address with discovery, thus then connecting to the remaining system such a MQTT or Leshan. Figure \ref{fig:avahi} shows how this can be done.
+mDNS stands for Multicast Domain Name System and it can inform other devices on the same network of the IP of the host. It uses the same structure as DNS but it is a zero configuration service. Avahi implements this zero configuration network discovery profile. On linux Avahi is already installed an requires no extra installation. Both the cloud and end device need to take advantage of this service and can retrieve the IP address with discovery, thus then connecting to the remaining system such a MQTT or Leshan. Figure \ref{fig:avahi} shows how this can be done.
 
 \begin{figure}[h]
 	\begin{center}
