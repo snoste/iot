@@ -9,6 +9,8 @@
 	commentstyle=\color{red},
 	keywordstyle=\color{blue}
 }
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \usepackage{biblatex}
 \usepackage[colorlinks=true,allcolors=black]{hyperref}
 %\usepackage[backend=biber, bibencoding=utf8, style=ieee]{biblatex}
@@ -35,16 +37,47 @@
 \end{abstract}
 
 \section{Group Members}
+\begin{table}[htbp]
+	\caption{}
+	\begin{tabular}{lclL{1.6cm}L{1cm}}
+		\toprule
+		No & Name & Student ID & Email & Master Program \\ 
+		\midrule
+		1 & Sai Krishna Kalluri & 1035631 & s.k.kalluri@ \newline student.tue.nl & ES \\ 
+		2 & Snorri Stefansson & 1033995 & s.stefansson@ \newline student.tue.nl & ES \\ 
+		\toprule
+	\end{tabular}
+	\label{}
+\end{table}
 
 \section{Group Partners}
-
+\begin{table}[htbp]
+	\caption{}
+	\begin{tabular}{lL{0.2cm}L{.8cm}L{3.3cm}lL{.6cm}}
+		\toprule
+		No & Group No \newline & \newline Part  & Group Member’s Name and Email & StudID & Program \\ 
+		\midrule
+		1 & 11 & End Device & \textbf{Christoforos Boukouvalas} \newline c.boukouvalas@student.tue.nl & 0832600 &  \\ 
+		&  11& End Device & \textbf{Nikos Avramis} \newline avramisn@gmail.com & 1115964 & AT \\ 
+		\midrule
+		2 & 10 & Cloud & \textbf{Michalis Kapsalakis}\newline m.kapsalakis@student.tue.nl  & 0979557” & IST \\ 
+		& 10 & Cloud & \textbf{Tho Le Phuoc} \newline thole020287@gmail.com &  & CS \\ 
+		\toprule
+	\end{tabular}
+	\label{}
+\end{table}
 
 
 
 \section{System Description - Understanding the application}
 
-Creating a lighting system with an IoT architecture may sound like an overkill, yet when the application and architecture is designed carefully it becomes essential in everyday life. This system will be described as it will be tested in the final plug fest of this course. The light system is composed of; four lights, each with a user, a user application with a UI, a sensor to detect the users presence, a manager, his web manager UI. These are the most important physical components which allow for a complete system to be operated. There are three groups which develop this system as stated in Figure \ref{fig:fig1}.
+Creating a lighting system with an IoT architecture may sound like an overkill, yet when the application and architecture is designed carefully it becomes essential in everyday life. This system will be described as it will be tested in the final plug fest of this course. The light system is composed of; four lights, each with a user, a user application with a UI, a sensor to detect the users presence, a manager, his web manager UI. These are the most important physical components which allow for a complete system to be operated. 
 
+
+
+\section{System Interfaces}
+There are three groups which develop this system as stated in Figure \ref{fig:fig1}.
+Each team has their purpose. This is the report of the broker, thus will be written with that perspective. Two other teams complete the total assignment, they are cloud group and end-device group and will be references as that through out the report. To shortly describe the relationship with these groups and their purpose; The cloud group is basically responsible of bookkeeping of all information important for the system and the end-device group is responsible of maintaining lights and sensors in the systems which define end device. The end device will present light upon request of the user and be able to detect a user with a camera, sensor.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=1\linewidth]{img/design}
@@ -53,9 +86,6 @@ Creating a lighting system with an IoT architecture may sound like an overkill, 
 	\end{center}
 \end{figure}
 
-\section{System Interfaces}
-
-Each team has their purpose. This is the report of the broker, thus will be written with that perspective. Two other teams complete the total assignment, they are cloud group and end-device group and will be references as that through out the report. To shortly describe the relationship with these groups and their purpose; The cloud group is basically responsible of bookkeeping of all information important for the system and the end-device group is responsible of maintaining lights and sensors in the systems which define end device. The end device will present light upon request of the user and be able to detect a user with a camera, sensor.
 
 \section{Implementation, Architecture and Protocols}
 
@@ -87,13 +117,6 @@ This part
 \subsection{MQTT: Mosquitto}
 
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=.7\linewidth]{img/androidapp}
-		\caption{}
-		\label{fig:fig3}
-	\end{center}
-\end{figure}
 
 
 \input{prod}
