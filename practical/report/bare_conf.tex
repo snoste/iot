@@ -33,8 +33,6 @@
 		Email: saikrishh.kalluri@gmail.com \& \\  Snorri Stefansson, TU/e, Netherlands, Email: snorriste@gmail.com}
 \maketitle
 
-
-
 \begin{abstract}
 	This practical assignment for the course IoT involves creating a lightning system controlled and managed by different but relevant wireless protocols and separated individual applications. The architecture and development of this system will be the topic of this report.\\	
 \end{abstract}
@@ -107,7 +105,7 @@ There are four significant deliverables for the broker group. Each of them
 
 \textit{A laptop with Ubuntu 16.04 64-bit was used to run all these modules except the Android app which was run with an emulator and designed on a Windows computer.}
 
-The architecture is somewhat predefined but many design options were left up to the teams. All communication and information will pass through the broker on its way to the endpoint.
+Documentation was found in the thorough tutorial library provided on the course website \cite{tut}. The architecture is somewhat predefined but many design options were left up to the teams. All communication and information will pass through the broker on its way to the endpoint.
 
 \begin{figure}[h]
 	\begin{center}
@@ -134,7 +132,15 @@ mDNS stands for Multicast Domain Name System and it can inform other devices on 
 For embedding this into Java, Python or any other high level programming language, it is possible to call the bash command with a 'OS' library and read the output. Setting this up on the broker only required running on startup. Problems during the development were mostly related to port and firewall issues with the laptop or network connection.
 
 \subsection{MQTT: Mosquitto}
-MQTT stands for MQ Telemetry Transport and is a very light weight publish and subscribe protocol. The Mosquitto broker is installed on the linux machine and then the clients can both publish messages to topics and subscribe to the topics as well. This module worked seamlessly after install. In the testing section it can be observed how messages are published (this is only for making sure from the broker side that the MQTT broker is working).
+MQTT stands for MQ Telemetry Transport and is a very light weight publish and subscribe protocol. The Mosquitto broker is installed on the linux machine and then the clients can both publish messages to topics and subscribe to the topics as well. This module worked seamlessly after install. In the testing section it can be observed how messages are published (this is only for making sure from the broker side that the MQTT broker is working). Figure \ref{fig:mqtt2} shows the Mosquitto messaging broker installed on the linux computer.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.8\linewidth]{img/mqtt2}
+		\caption{Mosquitto install on the linux machine}
+		\label{fig:mqtt2}
+	\end{center}
+\end{figure}
 
 \input{prod}
 \input{disc}
@@ -142,6 +148,7 @@ MQTT stands for MQ Telemetry Transport and is a very light weight publish and su
 \input{refl}
 \input{cont}
 
+\pagebreak
 \printbibliography
 
 \end{document}
