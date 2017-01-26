@@ -95,7 +95,7 @@ Each team has their purpose. This is the report of the broker, thus will be writ
 
 \section{Implementation, Architecture and Protocols}
 
-There are four significant deliverables for the broker group. Each of them 
+There are four significant deliverables for the broker group. Each of them had to be dealt with separately: 
 \begin{enumerate}
 	\item There is a user app for the user to control the light/s, which was selected to be a Android app for this showcase.
 	\item mDNS discovery service. Avahi was chosen for this job and is built into linux or can be used with python for integration into a python project.
@@ -114,6 +114,42 @@ Documentation was found in the thorough tutorial library provided on the course 
 		\label{fig:fig2}
 	\end{center}
 \end{figure}
+
+\section{Questionnaire and work-flow}
+
+Here are some generic 
+\begin{enumerate}
+	
+	\item Why did you choose that implementation setup.
+	\begin{itemize}
+		\item The implementation setup shown in Figure \ref{fig:fig2} was chosen for the project. The reason is completely based on the knowledge base of the group and team. This was done to try to shorten the development time. A joint opinion was made towards using HTTP between cloud and broker and Leshan for main communication between end device and broker. The android user app was chosen because it is also written in Java like Leshan it would help to keep to as few programming languages as possible. There was little to no choice regarding MQTT broker (Mosquitto) nor the mDNS service (Linux built in).
+	\end{itemize}
+	\item How long did it take to learn to use the LWM2M framework, Leshan.
+	\begin{itemize}
+		\item This was one of the larges obstacles where neither of the group members and done much work in Java. The learning curve is reasonable were already familiar with object orientated programming. Thus it took around a 3 days, netto, to create a base for the project and then soma additional hours adapting to the other groups architecture. 
+	\end{itemize}
+	\item Go long did it take to implement your part of the system.
+	\begin{itemize}
+		\item The whole process started early but the time spent on the project increased when getting closer to the plugfest. In total the work took 5 days per person, assuming approximately 10 hours a day.
+	\end{itemize}
+	\item what were the steps you go through for implementing your part of the system.
+	\begin{itemize}
+		\item Firstly research about the whole project and then further research on each of the communication methods and protocols. Which operating system to pick for the broker, linux. Then piece by piece the parts were done individually until completed enough to puzzle together with the other teams.
+	\end{itemize}
+	\item What were the difficulties that you encounter during implementation.
+	\begin{itemize}
+		\item Mostly, there were problems using Leshan and making it work so that it could be developed in Visual studio (Windows only) and then run on the linux machine. It is possible to develop on linux in Eclipse, but that is a terrible idea were Visual studio is much further developed for high level use. Solution was to use git for the whole Leshan project and only build with Linux after pulling the latest updates. This was the main difficulty but other smaller ones will be mentioned later.
+	\end{itemize}
+	\item What were the notable programming limitations of the chosen tools, libraries or frameworks.
+	\begin{itemize}
+		\item Not really. They are high level and well documented.
+	\end{itemize}
+	\item  What are your suggestion as a programmer for better experience in implementing IoT application. 
+	\begin{itemize}
+		\item Just to try to create one central location where all the team members can meet and easily connect to the same network, with internet access preferably. This seems maybe a small advice, but this is very important. And if possible to have all devices powered on at all times with ssh access such that people can work on them from anywhere. The cloud and broker team could also use their raspberry pis to develop the project and would not have to meet as often and allow for more debugging every now and then.
+	\end{itemize}
+
+\end{enumerate}
 
 \input{lwm2m}
 
