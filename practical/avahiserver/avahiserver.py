@@ -9,7 +9,7 @@ class ZeroconfService:
 
     """
 
-    def __init__(self, name, port, stype="_http._tcp",
+    def __init__(self, name, port, stype="_coap._udp",
                  domain="", host="", text=""):
         self.name = name
         self.stype = stype
