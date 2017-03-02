@@ -1,0 +1,194 @@
+/*******************************************************************************
+ * Copyright (c) 2017 Sierra Wireless and others.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * and Eclipse Distribution License v1.0 which accompany this distribution.
+ * 
+ * The Eclipse Public License is available at
+ *    http://www.eclipse.org/legal/epl-v10.html
+ * and the Eclipse Distribution License is available at
+ *    http://www.eclipse.org/org/documents/edl-v10.html.
+ * 
+ * Contributors:
+ *     Sierra Wireless - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.leshan.client.demo;
+
+import org.eclipse.leshan.client.resource.BaseInstanceEnabler;
+import org.eclipse.leshan.core.node.LwM2mResource;
+import org.eclipse.leshan.core.response.ReadResponse;
+import org.eclipse.leshan.core.response.WriteResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class LightDevice extends BaseInstanceEnabler {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MyLocation.class);
+    private long groupNo;
+    private String LightId;
+    //private String DeviceType;
+    private String LightState;
+    private String UserType;
+    private String UserId;
+    private String LightColor;
+    private boolean LowLight;
+    private String roomId;
+    private double locationX;
+    private double locationY;
+
+    public LightDevice() {
+    	this.LightState="Free";
+    	
+    	this.LightColor="Off";
+    	this.LowLight=1;
+        this.groupNo = 0;
+        this.locationX = 0;
+        this.locationY = 0;
+        this.roomId = "Room-0";
+    }
+
+    @Override
+    public ReadResponse read(int resourceid) {
+        LOG.info("Read on Location Resource " + resourceid);
+        switch (resourceid) {
+        case 0:
+            return ReadResponse.success(resourceid, getSensorId());
+        case 1:
+            return ReadResponse.success(resourceid, getDeviceType());
+        case 2:
+            return ReadResponse.success(resourceid, getSensorState());
+        case 3:
+            return ReadResponse.success(resourceid, getUserType());
+        case 4:
+            return ReadResponse.success(resourceid, getUserId());
+        case 5:
+            return ReadResponse.success(resourceid, getLightColor());
+        case 6:
+            return ReadResponse.success(resourceid, getLowLight());
+        case 7:
+            return ReadResponse.success(resourceid, getGroupNo());
+        case 8:
+            return ReadResponse.success(resourceid, getLocationX());
+        case 9:
+            return ReadResponse.success(resourceid, getLocationY());
+        case 10:
+            return ReadResponse.success(resourceid, getRoomId());
+        default:
+            return super.read(resourceid);
+        }
+    }
+
+   
+	@Override
+    public WriteResponse write(int resourceid, LwM2mResource value) {
+        LOG.info("Write on Device Resource " + resourceid + " value " + value);
+        switch (resourceid) {
+        case 5:
+        	setLightColor((String) value.getValue());
+            fireResourcesChange(resourceid);
+            return WriteResponse.success();
+        case 6:
+        	setLowLight((boolean) value.getValue());
+            fireResourcesChange(resourceid);
+            return WriteResponse.success();
+        case 7:
+            setGroupNo((long) value.getValue());
+            fireResourcesChange(resourceid);
+            return WriteResponse.success();
+        case 8:
+            setLocationX((double) value.getValue());
+            fireResourcesChange(resourceid);
+            return WriteResponse.success();
+        case 9:
+            setLocationY((double) value.getValue());
+            fireResourcesChange(resourceid);
+            return WriteResponse.success();
+        case 10:
+            setRoomId((String) value.getValue());
+            fireResourcesChange(resourceid);
+            return WriteResponse.success();
+        default:
+            return super.write(resourceid, value);
+        }
+    }
+
+    // getters
+	
+	
+
+	private boolean getLowLight() {
+			// TODO Auto-generated method stub
+			return LowLight;
+		}
+
+		private String getLightColor() {
+			// TODO Auto-generated method stub
+			return LightColor;
+		}
+
+		private String getUserType() {
+			
+			return UserType;
+		}
+
+    private String getSensorId() {
+        return "Sensor-Device-" + getGroupNo() + "-1";
+    }
+
+    private String getDeviceType() {
+        return "Sensor Device";
+    }
+
+    private String getSensorState() {
+        return "FREE";
+    }
+
+    private String getUserId() {
+        return "Office-Worker-" + getGroupNo();
+    }
+
+    private long getGroupNo() {
+        return groupNo;
+    }
+
+    private double getLocationX() {
+        return locationX;
+    }
+
+    private double getLocationY() {
+        return locationY;
+    }
+
+    private String getRoomId() {
+        return roomId;
+    }
+
+    // Setters
+    
+    private void setLowLight(boolean value) {
+		// TODO Auto-generated method stub
+		LowLight=value;
+	}
+
+	private void setLightColor(String value) {
+		// TODO Auto-generated method stub
+		LightColor=value;
+	}
+    private void setGroupNo(long group) {
+        groupNo = group;
+    }
+
+    private void setLocationX(double x) {
+        locationX = x;
+    }
+
+    private void setLocationY(double y) {
+        locationY = y;
+    }
+
+    private void setRoomId(String room) {
+        roomId = room;
+    }
+
+}
