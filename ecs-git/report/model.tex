@@ -1,33 +1,62 @@
 \section{System Model Derivation and Control Parameter Design}
 %System	model	derivation	and	controller	parameter	design
+The objectives for the controller is to properly control the given system with a set of design parameters. These parameters, shown in Table \ref{tab:design}, have to be design and put into perspective with our system, which role they play and the best way to derive them adequately.
 
-This section will discuss how optimal values for P,C, Sensor to actuator delay, TDM table size are found. Some observations were made about relationships of these variables to simplify the search for optimal design parameters.
+There are namely a number of steps taken until all parameters can be considered to satisfy the performance constraints of the controller. These basic steps can be seen in the following list.
 
-Design
+\begin{enumerate}
+	\item Step 1: Derive the system model. Determine the A, B and C matrices in relation to all constants by hand calculations. Inserting this into Matlab. These calculations can be seen in Section \ref{sec:controllerstructure} in full detail.
+	\item Step 2: Forming sensible values for C,P TDM\_TABLE\_Size and DELAY. The relationship between these values was inspected in full detail and is discussed in Section \ref{sec:platform}
+	\item Step 3: Determine the locations of Ts, Tc and Ta in the TDM table.
+	\item Step 4: Determining the sensor to actuator delay in relation to the chosen design parameters, especially P, C and TDM table size is calculated and discussed in Section \ref{sec:stad}. 
+	\item Step 5: Simulation for all determined parameters is run and checked if they meet all performance constraints 
+	\item Step 6:
+\end{enumerate}
+
+
 \begin{table}[h!]
 	\centering
-	\caption{Table}
-	\begin{tabular}{lc}
+	\caption{Design parameters and deliverables for the model. The poles are also something that has to be design or chosen but that will be discussed in Section \ref{sec:controllerstructure}}
+	\begin{tabular}{lll}
 		\toprule
-		Design Parameter & Unit\\
+		Design Parameter & Symbol/Referenced as &Unit\\
 		\midrule
-		CoMik microkernel slot size&C\\
-		Partition slot size& P\\
-		TDM table size& TDM\_TABLE\_SIZE\\
-		Partition slots allocation	for	&Ts,	Tc,	and	Ta\\
-		Sensor-to-actuator	delay& DELAY	\\
-		Feedback gain& K\\
-		Feedforward gain& F\\
+		CoMik microkernel slot size& C & Clock Cycles \\
+		Partition slot size& P & Clock Cycles\\
+		TDM table size& TDM\_TABLE\_SIZE & Natural Number larger than 2\\
+		Partition slots allocation	& for Ts, Tc, and Ta & Location in TDM table \\
+		Sensor-to-actuator	delay& DELAY & Clock Cycles	\\
+		Feedback gain& K & 4x4 matrix \\
+		Feedforward gain& F & 4x1 matrix \\
 		\midrule		
 	\end{tabular}
 	\label{tab:design}
 \end{table}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Constants referenced to in calculations}
+	\begin{tabular}{llll}
+		\toprule
+		Symbol & Description & Value & Unit\\ 
+		\midrule
+		$\theta$ & Masses position  & -&rad \\ 
+		$i_m$ & Motor current  & - &A \\ 
+		J$_1 = J_2$ & Inertia  & $3.75\cdot10^{-6}$&$Kgm^2$  \\ 
+		b & Friction  coefficient   &$ 1\cdot10^{-5} $&Nms/rad\\ 
+		k & Torsional spring  & 0.2656 &Nm/rad\\
+		d & Torsional damping  & $3.125\cdot10^{-5}$&Nms/rad \\ 
+		$K_m$ & Motor constant  & $4.4\cdot10^{-2}$&Nm/A  \\ 
+		\midrule
+	\end{tabular}
+	\label{}
+\end{table}
+
  
 
 \subsection{Controller Structure}
-
-The system can be described with the fourth order differential equation shown in Equation \ref{eq:1} and \ref{eq:2} which will be solved considering Equation \ref{eq:3}. 
-
+ \label{sec:controllerstructure}
+The system can be described with the fourth order differential equation shown in Equation \ref{eq:1} and \ref{eq:2} which will be solved considering Equation \ref{eq:3}. From these equations the Feedback- and Feedforward gain can be determined in relations to the constants in the system.
 %\color{red}
 %Show some equations 
 %\color{black}
@@ -43,28 +72,52 @@ J_2 \; \ddot{\theta}_2 = -k(\theta_2-\theta_1) - d(\dot{\theta}_2-\dot{\theta}_1
 \end{equation}
 
 \begin{equation}
-x_1 = \theta_1 \qquad x_2 = \theta_2\qquad x_3 = \dot{\theta_1}=\omega_1\qquad x_4 = \dot{\theta_2} = \omega_2
 \label{eq:3}
+\text{\textit{\textbf{x}}}=
+\begin{bmatrix}
+x_1\\
+x_2 \\
+x_3 \\
+x_4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+\theta_1\\
+ \theta_2\\
+\dot{\theta_1}\\
+\dot{\theta_2}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\theta_1\\
+\theta_2\\
+\omega_1\\
+\ \omega_2
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\dot{\text{\textit{\textbf{x}}}}(t) = \bar{\text{\textbf{A}}}\text{\textit{\textbf{x}}}(t) +  \bar{\text{\textbf{B}}}\text{\textit{\textbf{u}}}(t) \text{ and } \text{\textit{\textbf{y}}}(t) = \bar{\text{\textbf{C}}}\text{\textit{\textbf{x}}}(t) \qquad \text{ where } \quad \text{\textit{\textbf{u}}}=i_m \text{ and \textit{\textbf{y}}}=\theta_1
 \end{equation}
 
 \begin{equation}
 \dot{\text{\textit{\textbf{x}}}} = \begin{bmatrix}
 & & & \\[0.3em]
-\text{\color{white}H\color{black}} &\text{\color{white}h\color{black}} &\text{\color{white}hh\color{black}} &\text{\color{white}hh\color{black}} \\[0.3em]
-\text{\color{white}hh\color{black}}& & & \\[0.3em]
+\text{\color{white}H\color{black}} &\text{\color{white}h\color{black}} &\text{\color{white}hh\color{black}} &\text{\color{white}hh\color{black}} \\
+\text{\color{white}hh\color{black}}& & & \\
 \text{\color{white}hh\color{black}} & & &
 \end{bmatrix}
 \begin{bmatrix}
-\theta_1\\[0.3em]
-\theta_2\\[0.3em]
-\omega_1\\[0.3em]
+\theta_1\\
+\theta_2\\
+\omega_1\\
 \omega_2\\
 \end{bmatrix}
 +
 \begin{bmatrix}
-\text{\color{white}hh\color{black}}\\[0.3em]
-\text{\color{white}hh\color{black}}\\[0.3em]
-\text{\color{white}hh\color{black}}\\[0.3em]
+\text{\color{white}hh\color{black}}\\
+\text{\color{white}hh\color{black}}\\
+\text{\color{white}hh\color{black}}\\
 \text{\color{white}hh\color{black}}\\
 \end{bmatrix}\text{\textit{\textbf{u}}}
 \quad \text{ and } \quad
@@ -72,22 +125,13 @@ x_1 = \theta_1 \qquad x_2 = \theta_2\qquad x_3 = \dot{\theta_1}=\omega_1\qquad x
 \text{\color{white}hh\color{black}} &\text{\color{white}hh\color{black}}&\text{\color{white}hh\color{black}}&\text{\color{white}hh\color{black}}
 \end{bmatrix}
 \begin{bmatrix}
-\theta_1\\[0.3em]
-\theta_2\\[0.3em]
-\omega_1\\[0.3em]
+\theta_1\\
+\theta_2\\
+\omega_1\\
 \omega_2\\
 \end{bmatrix}
 \label{eq:4}
 \end{equation}
 
-\subsection{Steps of Design Workflow}
 
 
- \color{red}
- Show steps of design workflow = Snorri
- \color{black}
- 
-\subsection{Implementation of Design steps in Matlab}
-\color{red}
- Show matlab code for designing and explain matlab approuch,
-\color{black}
