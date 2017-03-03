@@ -3,6 +3,83 @@
 
 This section will discuss how optimal values for P,C, Sensor to actuator delay, TDM table size are found. Some observations were made about relationships of these variables to simplify the search for optimal design parameters.
 
+Design
+\begin{table}[h!]
+	\centering
+	\caption{Table}
+	\begin{tabular}{lc}
+		\toprule
+		Design Parameter & Unit\\
+		\midrule
+		CoMik microkernel slot size&C\\
+		Partition slot size& P\\
+		TDM table size& TDM\_TABLE\_SIZE\\
+		Partition slots allocation	for	&Ts,	Tc,	and	Ta\\
+		Sensor-to-actuator	delay& DELAY	\\
+		Feedback gain& K\\
+		Feedforward gain& F\\
+		\midrule		
+	\end{tabular}
+	\label{tab:design}
+\end{table}
+ 
+
+\subsection{Controller Structure}
+
+The system can be described with the fourth order differential equation shown in Equation \ref{eq:1} and \ref{eq:2} which will be solved considering Equation \ref{eq:3}. 
+
+%\color{red}
+%Show some equations 
+%\color{black}
+
+\begin{equation}
+J_1 \; \ddot{\theta}_1 = K_m \; i_m - k(\theta_1-\theta_2) - d(\dot{\theta}_1-\dot{\theta}_2) - b(\dot{\theta}_1-\dot{\theta}_2)
+\label{eq:1}
+\end{equation}
+
+\begin{equation}
+J_2 \; \ddot{\theta}_2 = -k(\theta_2-\theta_1) - d(\dot{\theta}_2-\dot{\theta}_1) - b(\dot{\theta}_2-\dot{\theta}_1)
+\label{eq:2}
+\end{equation}
+
+\begin{equation}
+x_1 = \theta_1 \qquad x_2 = \theta_2\qquad x_3 = \dot{\theta_1}=\omega_1\qquad x_4 = \dot{\theta_2} = \omega_2
+\label{eq:3}
+\end{equation}
+
+\begin{equation}
+\dot{\text{\textit{\textbf{x}}}} = \begin{bmatrix}
+& & & \\[0.3em]
+\text{\color{white}H\color{black}} &\text{\color{white}h\color{black}} &\text{\color{white}hh\color{black}} &\text{\color{white}hh\color{black}} \\[0.3em]
+\text{\color{white}hh\color{black}}& & & \\[0.3em]
+\text{\color{white}hh\color{black}} & & &
+\end{bmatrix}
+\begin{bmatrix}
+\theta_1\\[0.3em]
+\theta_2\\[0.3em]
+\omega_1\\[0.3em]
+\omega_2\\
+\end{bmatrix}
++
+\begin{bmatrix}
+\text{\color{white}hh\color{black}}\\[0.3em]
+\text{\color{white}hh\color{black}}\\[0.3em]
+\text{\color{white}hh\color{black}}\\[0.3em]
+\text{\color{white}hh\color{black}}\\
+\end{bmatrix}\text{\textit{\textbf{u}}}
+\quad \text{ and } \quad
+\text{\textit{\textbf{y}}}=\begin{bmatrix}
+\text{\color{white}hh\color{black}} &\text{\color{white}hh\color{black}}&\text{\color{white}hh\color{black}}&\text{\color{white}hh\color{black}}
+\end{bmatrix}
+\begin{bmatrix}
+\theta_1\\[0.3em]
+\theta_2\\[0.3em]
+\omega_1\\[0.3em]
+\omega_2\\
+\end{bmatrix}
+\label{eq:4}
+\end{equation}
+
 \subsection{Steps of Design Workflow}
 
 
