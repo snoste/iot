@@ -57,7 +57,7 @@ There are namely a number of steps taken until all parameters can be considered 
 
 \subsection{Controller Structure}
  \label{sec:controllerstructure}
-The system can be described with the second order differential equation shown in Equation \ref{eq:1} and \ref{eq:2} which will be solved considering Equation \ref{eq:3}. From these equations the Feedback- and Feedforward gain can be determined in relations to the constants in the system.
+The system can be described with the second order differential equation shown in Equation \ref{eq:1} and \ref{eq:2} which will be solved considering Equation \ref{eq:3}. From these equations the Feedback- and Feedforward gain can be determined in relations to the constants in the system. All of these components are relative to time but this will not be denoted here to enforce clarity during calculations.
 
 \begin{equation}
 J_1 \; \ddot{\theta}_1 = K_m \; i_m - k(\theta_1-\theta_2) - d(\dot{\theta}_1-\dot{\theta}_2) - b(\dot{\theta}_1-\dot{\theta}_2)
@@ -67,16 +67,19 @@ J_1 \; \ddot{\theta}_1 = K_m \; i_m - k(\theta_1-\theta_2) - d(\dot{\theta}_1-\d
 \begin{equation}
 J_2 \; \ddot{\theta}_2 = -k(\theta_2-\theta_1) - d(\dot{\theta}_2-\dot{\theta}_1) - b(\dot{\theta}_2-\dot{\theta}_1)
 \label{eq:2}
+\vspace{.2em}
 \end{equation}
+
+The sensor values can be interpreted as shown in Equation \ref{eq:3} for better notation as well as showing the first derivative of them which will be used to derive the final equation in Equation \ref{eq:5}.
 
 \begin{equation}
 \label{eq:3}
-\text{\textit{\textbf{x}}}(t)=
+\text{\textit{\textbf{x}}} =
 \begin{bmatrix}
-x_1(t)\\
-x_2(t) \\
-x_3(t) \\
-x_4(t) 
+x_1 \\
+x_2  \\
+x_3  \\
+x_4  
 \end{bmatrix}
 =
 \begin{bmatrix}
@@ -92,18 +95,43 @@ x_4(t)
 \omega_1\\
 \ \omega_2
 \end{bmatrix}
+\quad\text{ and }\quad
+\dot{\text{\textit{\textbf{x}}}} =
+\begin{bmatrix}
+\dot{\theta}_1\\
+\dot{\theta}_2\\
+\ddot{\theta}_1\\
+\ddot{\theta}_2
+\end{bmatrix}
+\vspace{.2em}
+\end{equation}
+
+Now Equations \ref{eq:1} and \ref{eq:2} can be translated into these terms, shown in Equation \ref{eq:extra1} and \ref{eq:extra2}
+
+\begin{equation}
+ \ddot{\theta}_1 \; = \dot{x}_3 = \dfrac{K_m \; i_m}{J_1} + x_1 \frac{-k}{J_1} +  x_2 \frac{k}{J_1}
+\label{eq:extra1}
 \end{equation}
 
 \begin{equation}
-\dot{\text{\textit{\textbf{x}}}}(t) = {\text{\textbf{A}}}\text{\textit{\textbf{x}}}(t) +  {\text{\textbf{B}}}\text{\textit{{u}}}(t) \text{ and } \text{\textit{{y}}}(t) = {\text{\textbf{C}}}\text{\textit{\textbf{x}}}(t) \qquad \text{ where } \quad \text{input: \textit{{u}}}=i_m \quad\text{ , output: \textit{{y}}}=\theta_1
+J_2 \; \ddot{\theta}_2 = -k(\theta_2-\theta_1) - d(\dot{\theta}_2-\dot{\theta}_1) - b(\dot{\theta}_2-\dot{\theta}_1)
+\label{eq:extra2}
+\vspace{.2em}
 \end{equation}
 
 \begin{equation}
-\dot{\text{\textit{\textbf{x}}}} = \begin{bmatrix}
-& & & \\[0.3em]
-\text{\color{white}H\color{black}} &\text{\color{white}h\color{black}} &\text{\color{white}hh\color{black}} &\text{\color{white}hh\color{black}} \\
-\text{\color{white}hh\color{black}}& & & \\
-\text{\color{white}hh\color{black}} & & &
+\dot{\text{\textit{\textbf{x}}}}  = {\text{\textbf{A}}}\text{\textit{\textbf{x}}}  +  {\text{\textbf{B}}}\text{\textit{{u}}}  \text{ and } \text{\textit{{y}}}  = {\text{\textbf{C}}}\text{\textit{\textbf{x}}}  \qquad \text{ where } \quad \text{input: \textit{{u}}}=i_m \quad\text{ , output: \textit{{y}}}=\theta_1
+\label{eq:4}
+\end{equation}
+
+Equation \ref{eq:4} and \ref{eq:5} show the same equation. But the matrices can be derived by combing the equations above and resulting in Equation \ref{eq:5}.
+
+\begin{equation}
+\dot{\text{\textit{\textbf{x}}}}  = \begin{bmatrix}
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1\\
+& & & \\
+& & &
 \end{bmatrix}
 \begin{bmatrix}
 \theta_1\\
@@ -128,5 +156,5 @@ x_4(t)
 \omega_1\\
 \omega_2\\
 \end{bmatrix}
-\label{eq:4}
+\label{eq:5}
 \end{equation}
