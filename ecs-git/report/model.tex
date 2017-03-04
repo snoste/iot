@@ -50,7 +50,7 @@ There are namely a number of steps taken until all parameters can be considered 
 		$K_m$ & Motor constant  & $4.4\cdot10^{-2}$&Nm/A  \\ 
 		\midrule
 	\end{tabular}
-	\label{}
+	\label{tab:constants}
 \end{table}
 
  
@@ -109,12 +109,12 @@ x_4
 Now Equations \ref{eq:1} and \ref{eq:2} can be translated into these terms, shown in Equation \ref{eq:extra1} and \ref{eq:extra2}
 
 \begin{equation}
- \ddot{\theta}_1 \; = \dot{x}_3 = \dfrac{K_m \; i_m}{J_1} + x_1 \frac{-k}{J_1} +  x_2 \frac{k}{J_1}
+ \ddot{\theta}_1 \; = \dot{x}_3 = \dfrac{K_m \; i_m}{J_1} + x_1 \frac{-k}{J_1} +  x_2 \frac{k}{J_1} + x_3 \frac{-(d+b)}{J_1} + x_4 \frac{d+b}{J_1}
 \label{eq:extra1}
 \end{equation}
 
 \begin{equation}
-J_2 \; \ddot{\theta}_2 = -k(\theta_2-\theta_1) - d(\dot{\theta}_2-\dot{\theta}_1) - b(\dot{\theta}_2-\dot{\theta}_1)
+ \ddot{\theta}_2 \; = \dot{x}_4 = x_1 \frac{k}{J_2} +  x_2 \frac{-k}{J_2} + x_3 \frac{d+b}{J_2} + x_4 \frac{-(d+b)}{J_2}
 \label{eq:extra2}
 \vspace{.2em}
 \end{equation}
@@ -124,14 +124,14 @@ J_2 \; \ddot{\theta}_2 = -k(\theta_2-\theta_1) - d(\dot{\theta}_2-\dot{\theta}_1
 \label{eq:4}
 \end{equation}
 
-Equation \ref{eq:4} and \ref{eq:5} show the same equation. But the matrices can be derived by combing the equations above and resulting in Equation \ref{eq:5}.
+Equation \ref{eq:4} and \ref{eq:5} show the same equation. But the matrices can be derived by combing the equations above and resulting in Equation \ref{eq:5}. This can then be used to calculate the K and F values mentioned in Table \ref{tab:design}.
 
 \begin{equation}
 \dot{\text{\textit{\textbf{x}}}}  = \begin{bmatrix}
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1\\
-& & & \\
-& & &
+\frac{-k}{J_1}&\frac{k}{J_1} & \frac{-(d+b)}{J_1}&\frac{d+b}{J_1} \\
+ \frac{k}{J_2}& \frac{-k}{J_2} & \frac{d+b}{J_2}& \frac{-(d+b)}{J_2}
 \end{bmatrix}
 \begin{bmatrix}
 \theta_1\\
@@ -141,14 +141,14 @@ Equation \ref{eq:4} and \ref{eq:5} show the same equation. But the matrices can 
 \end{bmatrix}
 +
 \begin{bmatrix}
-\text{\color{white}hh\color{black}}\\
-\text{\color{white}hh\color{black}}\\
-\text{\color{white}hh\color{black}}\\
-\text{\color{white}hh\color{black}}\\
+0\\
+0\\
+\dfrac{K_m}{J_1}\\
+0\\
 \end{bmatrix}\text{\textit{{u}}}
 \quad \text{ and } \quad
 \text{\textit{{y}}}=\begin{bmatrix}
-\text{\color{white}hh\color{black}} &\text{\color{white}hh\color{black}}&\text{\color{white}hh\color{black}}&\text{\color{white}hh\color{black}}
+1&0&0&0
 \end{bmatrix}
 \begin{bmatrix}
 \theta_1\\
