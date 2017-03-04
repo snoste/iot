@@ -1,6 +1,14 @@
 \section{Platform Parameter Design}
 \label{sec:platform}
 
+The microkernel slot size C, partition table size P and TDM table size in the control system design play a large role in task timing and scheduling. These parameters' units are shown in Table \ref{tab:design}. The mircokernel slot size will determine the the clock cycles (time) for which the microkernel needs to execute correctly, this was stated to be at least 40.96$\mu$s.
+
+Thus the microkernel slot size could at best reach roughly 40 $\mu$s which would yield to about: $$ C_{min} = 100MHz \cdot 40.96 \mu s = 4096 \;\;Clock \; Cycles$$
+
+This observation was small starting point of educated assumptions about which C and P to chose. Then it was decided rather than to pick values for P and C, pick a fraction, relating those two. 
+
+
+=1/(100000000/12288)
 \subsection{Steps of Design Workflow}
 
 This subsection will discuss how optimal values for P,C, Sensor to actuator delay, TDM table size are found.
