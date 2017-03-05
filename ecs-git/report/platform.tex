@@ -14,8 +14,8 @@ In Section \ref{sec:steps} the steps to the findings of sufficient values for P,
 This subsection will discuss selection of P,C, Sensor to actuator delay and some choices considered for poles, TDM table size in order to meet the design constraints. To create an overview of how this was done, a timeline with the steps taken will be presented here.
 
 \begin{enumerate}
-	\item First tests made were rather basic and were used to determine the acuteness of poles on the system. A Matlab script was made to
-	\item 
+	\item First tests made were rather basic and were used to determine the acuteness of poles on the system. A Matlab script was made to keep P=C,from 7000 up to 16000 clock cycles, and alternating the poles from 0.6 up to 0.9 with 0.1 as increment(keeping all poles at the same value). Along each test, settling time and validity of design constraints was included as output. Thus the valid parameter would render 0 or 1 depending on if all design constraints are met or not. 
+	\item Then ruling out poles at 0.6 and 0.7 and sticking to 0.8 and 0.8 where that gave more promising results.
 	\item
 	\item
 	\item
