@@ -37,7 +37,7 @@ This subsection will discuss selection of P,C, Sensor to actuator delay and some
 	
 	\begin{table}[htbp]
 		\centering
-		\caption{Options for platform parameters derived from numerous investigations and scripts. Higher ranking indicates overall better performance. Poles are chosen identical for all five of them.}
+		\caption{Options for platform parameters derived from numerous investigations and scripts. Higher ranking indicates overall better performance. Poles are chosen identical for all five of them. TDM table size it constant at 4.}
 		\begin{tabular}{lllccccc}
 			\toprule
 			Rank & C& P & Poles &Valid &OoC & R & $\dfrac{QoC}{R}$ [Cost Function] \\ 
@@ -48,16 +48,34 @@ This subsection will discuss selection of P,C, Sensor to actuator delay and some
 	\midrule
 	\end{tabular}
 	\label{tab:list}
-	
-	
-	
-	\item So now picking a few and creating graph which shows
 \end{table}
+
+	\item Now when some good values for P, C and the poles had been chosen it is a good time to look at the TDM table sizes. This is also covered in more detail in Section \ref{sec:codesign}. The main idea is that when changing the TDM table size has influence on OoC but not as drastically as poles, C and P.
+
 
 \end{enumerate}
 
 \subsubsection{Sensor to actuator delay}
 \label{sec:stad}
+
+The sensor to actuator delay is the time in the control system it takes from sensor input until computed and actuator actuates. This time is then highly related to P, C, TDM table size, Global clock frequency and sampling period. The exact delay can be precisely calculated per Equation \ref{eq:delay}. And number are put in according to one of the options determined for the controls system from Table \ref{tab:list}.
+
+\begin{equation}
+	\text{Exact Delay}=\left(\dfrac{(C+P)\cdot NUMTASKS}{Fs} \right) = \left(\dfrac{(16000+8000)\cdot 3}{100MHz} \right) = 72000 \text{ clock cycles}
+	\label{eq:delay}
+\end{equation}
+\begin{equation}
+	\text{Rounded Delay}= \text{ceil}\left(\dfrac{\text{Exact Delay}}{\text{Plant Sampling Period}}\right) \cdot \text{Plant Sampling Period} = 80000 \text{ clock cycles}
+\label{eq:rounddelay}
+\end{equation}
+
+\begin{equation}
+\text{Rounded Delay} - \text{Exact Delay}= 8000 \text{ clock cycles}
+\label{eq:delayall}
+\end{equation}
+
+
+
 
 \subsection{Implementation of Design steps in Matlab}
 \color{red}
