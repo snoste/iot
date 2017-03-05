@@ -70,14 +70,19 @@ The sensor to actuator delay is the time in the control system it takes from sen
 \end{equation}
 
 \begin{equation}
-\text{Rounded Delay} - \text{Exact Delay}= 8000 \text{ clock cycles}
+\text{Delay}=\text{Rounded Delay} - \text{Exact Delay}= 8000 \text{ clock cycles}
 \label{eq:delayall}
 \end{equation}
 
-
-
+Then when substituting 8000 for the delay in sconfig.c the output file gave error regarding timing that the delay might be to long. The reason might be because the delay landed just on the other side of the next task so reducing the delay to 7000 clock cycles did the trick and the results matched the simulink results.
 
 \subsection{Implementation of Design steps in Matlab}
 \color{red}
-Show matlab code for designing and explain matlab approach,
+Show matlab code for designing and explain matlab approach. Would be great if you, Sai, could just put some code snippets from matlab. Like some part of the looptrhough code where the valid parameters is gotten for example or your cool objects ;).
 \color{black}
+
+\begin{lstlisting}[language=matlab,caption={Matlab code showing the loopthrough function }]
+%Matlab code
+\end{lstlisting}
+
+
