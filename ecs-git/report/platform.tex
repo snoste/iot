@@ -30,7 +30,7 @@ This subsection will discuss selection of P,C, Sensor to actuator delay and some
 			\item[Poles=] [0.8:0.1:0.9]$\cdot$[1 1 1 1 1]
 			\item[TDM Table Size] = 4
 		\end{description}
-	This yielded \textbf{200 options} both valid and invalid counted.
+	This yielded \textbf{220 options} both valid and invalid counted.
 	\item Now filter out only valid results, which meet the design constraints set such as settling time and current limitations (and a few more). This is yielded to \textbf{144 valid options}.
 	\item Next calculate the Quality of Control and R for each of the valid option which then allows for calculating a cost function for each of the 144 options.
 	\item Now all of the options chosen at this point are valid but the cost function will allow us to determine the most promising ones even though this done for a fixed TDM table size. Out of these 144, the top candidates were chosen and are investigated further, these are shown in Table \ref{tab:list}. The higher the ranking, the better the options is considered to be. Where options with pole at 0.8 are a bit more unstable when settling time is up, the best options representing poles at 0.9 was also chosen even though it considerable worse ranking it proofs to be more stable.
