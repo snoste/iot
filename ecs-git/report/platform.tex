@@ -32,22 +32,26 @@ This subsection will discuss selection of P,C, Sensor to actuator delay and some
 		\end{description}
 	This yielded \textbf{200 options} both valid and invalid counted.
 	\item Now filter out only valid results, which meet the design constraints set such as settling time and current limitations (and a few more). This is yielded to \textbf{144 valid options}.
-	\item Next calculate the Quality of Control for each of the valid options and chose the best ones. The best 
-	\item
-	\item
+	\item Next calculate the Quality of Control and R for each of the valid option which then allows for calculating a cost function for each of the 144 options.
+	\item Now all of the options chosen at this point are valid but the cost function will allow us to determine the most promising ones even though this done for a fixed TDM table size. Out of these 144, the top candidates were chosen and are investigated further, these are shown in Table \ref{tab:list}. The higher the ranking, the better the options is considered to be. Where options with pole at 0.8 are a bit more unstable when settling time is up, the best options representing poles at 0.9 was also chosen even though it considerable worse ranking it proofs to be more stable.
+	
 	\begin{table}[htbp]
 		\centering
-		\caption{}
+		\caption{Options for platform parameters derived from numerous investigations and scripts. Higher ranking indicates overall better performance. Poles are chosen identical for all five of them.}
 		\begin{tabular}{lllccccc}
 			\toprule
 			Rank & C& P & Poles &Valid &OoC & R & $\dfrac{QoC}{R}$ [Cost Function] \\ 
 		\midrule
 		144 & 16000 & 8000 & 0.8 & 1 & 183.36 & 0.25 & 733.4 \\ 
-		128 & 13000 & 10000 & 0.8 & 1 & 183.89 & 0.33 & 563.9 \\ 
-		78 & 16000 & 8000 & 0.9 & 1 & 80.95 & 0.25 & 323.8 \\ 
+		128 & 13000 & 10000 & 0.8 & 1 & 183.89 & 0.33 & 564 \\ 
+		78 & 16000 & 8000 & 0.9 & 1 & 80.95 & 0.25 & 324 \\ 
 	\midrule
 	\end{tabular}
-	\label{}
+	\label{tab:list}
+	
+	
+	
+	\item So now picking a few and creating graph which shows
 \end{table}
 
 \end{enumerate}
