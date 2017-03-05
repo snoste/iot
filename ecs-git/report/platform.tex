@@ -9,7 +9,7 @@ This observation was small starting point of educated assumptions about which C 
 
 In Section \ref{sec:steps} the steps to the findings of sufficient values for P, C and TDM tabel size will be carried out. The goal is to meet the design constraints.
 
-\subsection{Steps of Design Workflow}
+\subsection{Design and Workflow}
 \label{sec:steps}
 This subsection will discuss selection of P,C, Sensor to actuator delay and some choices considered for poles, TDM table size in order to meet the design constraints. To create an overview of how this was done, a timeline with the steps taken will be presented here.
 
@@ -20,18 +20,36 @@ This subsection will discuss selection of P,C, Sensor to actuator delay and some
 	\begin{description}
 		\item[P=C=] [7000:1000:16000]
 		\item[Poles=] [0.6:0.1:0.9]$\cdot$[1 1 1 1 1]
+		\item[TDM Table Size] = 4
 	\end{description}
 	When poles were at 0.6 and 0.7 there were very few valid options so these were excluded.
 	
-	\item Then ruling out poles at 0.6 and 0.7 and sticking to 0.8 and 0.8 where that gave more promising results.
+	\item Then ruling out poles at 0.6 and 0.7 and sticking to 0.8 and 0.8 where that gave more promising results. Then adding a fraction relation between C and P as shown here:
 		\begin{description}
 			\item[P=$\dfrac{C}{frac}$] where frac = [1:0.1:2]
 			\item[Poles=] [0.8:0.1:0.9]$\cdot$[1 1 1 1 1]
+			\item[TDM Table Size] = 4
 		\end{description}
-	\item Now filter out only valid results, which meet the design constraints set such as settling time and current limitations.
-	\item 
+	This yielded \textbf{200 options} both valid and invalid counted.
+	\item Now filter out only valid results, which meet the design constraints set such as settling time and current limitations (and a few more). This is yielded to \textbf{144 valid options}.
+	\item Next calculate the Quality of Control for each of the valid options and chose the best ones. The best 
 	\item
 	\item
+	\begin{table}[htbp]
+		\centering
+		\caption{}
+		\begin{tabular}{lllccccc}
+			\toprule
+			Rank & C& P & Poles &Valid &OoC & R & $\dfrac{QoC}{R}$ [Cost Function] \\ 
+		\midrule
+		144 & 16000 & 8000 & 0.8 & 1 & 183.36 & 0.25 & 733.4 \\ 
+		128 & 13000 & 10000 & 0.8 & 1 & 183.89 & 0.33 & 563.9 \\ 
+		78 & 16000 & 8000 & 0.9 & 1 & 80.95 & 0.25 & 323.8 \\ 
+	\midrule
+	\end{tabular}
+	\label{}
+\end{table}
+
 \end{enumerate}
 
 \subsubsection{Sensor to actuator delay}
