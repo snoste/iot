@@ -15,8 +15,28 @@ x[k+1]= \phi z [k]+ \Gamma_{aug}u[k] \quad \text{ and } \quad y[k] + C_{aug} z[k
 \label{eq:code3}
 \end{equation}
 
+\begin{equation}
+z[k]=\begin{bmatrix}
+x[k]\\
+u[k-1]
+\end{bmatrix}
+\label{eq:code6}
+\end{equation}
 
 \begin{equation}
-u[k] = Kz[k] + Fr \quad \text{and} \quad K = -[ \ 0 \ 0 \ \cdots \ 1 \ ] \gamma_{aug}^{-1} H(\phi_{aug}) \quad \text{and} \quad F = \dfrac{1}{C_{aug} (I-\phi_{aug}-\Gamma_{aug}K)^{-1}\Gamma_{aug}}
-\label{eq:code4}
+u[k] = Kz[k] + Fr 
+\label{eq:code7} 
 \end{equation}
+
+
+\begin{equation}
+ K = -[ \ 0 \ 0 \ \cdots \ 1 \ ] \gamma_{aug}^{-1} H(\phi_{aug})
+\label{eq:code4} 
+\end{equation}
+
+\begin{equation}
+ F = \dfrac{1}{C_{aug} (I-\phi_{aug}-\Gamma_{aug}K)^{-1}\Gamma_{aug}}
+\label{eq:code5}
+\end{equation}
+
+
