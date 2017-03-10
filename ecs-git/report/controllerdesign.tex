@@ -1,2 +1,5 @@
 \subsection{Controller Design}
-In this subsection we discuss the method for designing the controller design parameters $K$ and $F$
+In this subsection we discuss the method for designing the controller design parameters FeedbackGain-$K$ and FeedForwardGain-$F$. In this problem we have the scenario where $D_c<h$. Since we our controller operates in discrete domain, we start with converting our continuous system into discrete domain. Therefore on applying ZOH sampling with period $h_c$ and constant sensor-actuator Delay $D_c$ we achieve the equation \ref{eq:code1}. From \ref{eq:code1} we can notice that the next output not only depends on current input but also n previous input. Hence, we simplify the system into equation \ref{eq:code2} after invoking .
+Thus matrices $\Phi$ ,$C$ are converted to $\Phi_{aug}$,$C_{aug}$ whereas $\Gamma_1$,$\Gamma_2$ are converted to $\Gamma_{aug}$.
+
+  Before deriving the controller gains it is important to verify if the system is controllable under given configuration. This can be verified by calculating $det(\gamma_{aug})$. If the determinent is not equal to 0, then system is controllable. After verifying the controllability of the system $K$ can be derived by applying Ackermanns formula \ref{eq:delay} and $F$ can be derived from eqaution .
