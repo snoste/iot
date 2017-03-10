@@ -7,7 +7,7 @@ There are namely a number of steps taken until all parameters can be considered 
 \begin{enumerate}
 	\item Step 1: Derive the system model. Determine the A, B and C matrices in relation to all constants by hand calculations. Inserting this into Matlab. These calculations can be seen in Section \ref{sec:controllerstructure} in full detail.
 	\item Step 2: Forming sensible values for C,P TDM\_TABLE\_Size and DELAY. The relationship between these values was inspected in full detail and is discussed in Section \ref{sec:platform}.
-	\item Step 3: Choosing desired poles according to the given requirements. Verfiying the controllability of the system for the choosen values. Computing the controller Feed-Forward and Feed-Back gains $F$ and $K$. Inserting these calculations into MATLAB. More about this step can be found in Section \ref{sec:platform}
+	\item Step 3: Choosing desired poles according to the given requirements. Verifying the controllability of the system for the chosen values. Computing the controller Feed-Forward and Feed-Back gains $F$ and $K$. Inserting these calculations into MATLAB. More about this step can be found in Section \ref{sec:platform}
 	\item Step 4: Determine the locations of Ts, Tc and Ta in the TDM table.
 	\item Step 5: Determining the sensor to actuator delay in relation to the chosen design parameters, especially P, C and TDM table size is calculated and discussed in Section \ref{sec:stad}. 
 	\item Step 6: Simulation for all determined parameters is run and checked if they meet all performance constraints. The check on the performance constraints is also performed during Step 2 by running a script for all parameters and checking every time. This is discussed in more detail in Section \ref{sec:platform}.
